@@ -52,8 +52,14 @@ FetchContent_Declare(
   GIT_REPOSITORY "https://github.com/catchorg/Catch2.git"
   GIT_TAG "v3.0.0-preview3"
 )
+include(FetchContent)
+FetchContent_Declare(
+  stduuid
+  GIT_REPOSITORY "https://github.com/mariusbancila/stduuid.git"
+  GIT_TAG "4959d46eb494f8eddd4a37a1c8c6434b41d56ca8"
+)
 
-FetchContent_MakeAvailable(Catch2)
+FetchContent_MakeAvailable(Catch2 stduuid)
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
 # Target names

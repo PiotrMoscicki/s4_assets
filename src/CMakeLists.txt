@@ -10,3 +10,5 @@ GenerateSourceGoups("${S4_ASSETS_MANAGER_SRCS}")
 add_library(${S4_ASSETS_MANAGER_TARGET} STATIC ${S4_ASSETS_MANAGER_SRCS})
 target_compile_features(${S4_ASSETS_MANAGER_TARGET} PUBLIC cxx_std_20)
 target_include_directories(${S4_ASSETS_MANAGER_TARGET} PUBLIC ${S4_ASSETS_MANAGER_INCLUDE})
+
+target_link_libraries(${S4_ASSETS_MANAGER_TARGET} PUBLIC stduuid)
