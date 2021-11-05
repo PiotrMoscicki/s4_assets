@@ -58,8 +58,14 @@ FetchContent_Declare(
   GIT_REPOSITORY "https://github.com/mariusbancila/stduuid.git"
   GIT_TAG "4959d46eb494f8eddd4a37a1c8c6434b41d56ca8"
 )
+include(FetchContent)
+FetchContent_Declare(
+  s4_rtti
+  GIT_REPOSITORY "https://github.com/PiotrMoscicki/s4_rtti.git"
+  GIT_TAG "main"
+)
 
-FetchContent_MakeAvailable(Catch2 stduuid)
+FetchContent_MakeAvailable(Catch2 stduuid s4_rtti)
 list(APPEND CMAKE_MODULE_PATH ${catch2_SOURCE_DIR}/extras)
 
 # Target names
