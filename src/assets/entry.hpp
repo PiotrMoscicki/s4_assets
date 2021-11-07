@@ -1,9 +1,5 @@
 #pragma once
 
-#include <variant>
-#include <string>
-#include <uuid.h>
-
 #include "assets_fwd.hpp"
 
 namespace assets {
@@ -11,10 +7,10 @@ namespace assets {
     //*********************************************************************************************
     //*********************************************************************************************
     //*********************************************************************************************
-    class Node {
+    template <typename T>
+    class Entry {
     public:
-        virtual ~Node() = default;
 
-    }; // class Node
+    }; // class Entry
 
 } // namespace assets

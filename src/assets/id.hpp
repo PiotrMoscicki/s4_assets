@@ -1,6 +1,5 @@
 #pragma once
 
-#include "assets_fwd.hpp"
 #include "node.hpp"
 
 namespace assets {
@@ -8,10 +7,25 @@ namespace assets {
     //*********************************************************************************************
     //*********************************************************************************************
     //*********************************************************************************************
-    class Id : public Node {
+    class IdBase : public Node {
     public:
-        Id() = default;
-        Id(uuids::uuid uuid) : Node(std::move(uuid)) {}
+        IdBase() = default;
+        IdBase(uuids::uuid id) : m_id(std::move(id)) {}
+
+        const uuids::uuid& id() const { return m_id; }
+
+    protected:
+        uuids::uuid m_id;
+
+    }; // class IdBase
+
+    //*********************************************************************************************
+    //*********************************************************************************************
+    //*********************************************************************************************
+    template <typename T>
+    class Id : public IdBase {
+    public:
+        using IdBase::IdBase;
 
     }; // class Id
 

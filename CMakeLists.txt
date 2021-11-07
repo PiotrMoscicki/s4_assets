@@ -77,5 +77,3 @@ set(S4_ASSETS_MANAGER_TEST_TARGET s4_assets_manager_test)
 add_subdirectory(src)
 add_subdirectory(example)
 add_subdirectory(test)
-
-list(APPEND CMAKE_CTEST_ARGUMENTS "--output-on-failure")

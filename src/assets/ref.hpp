@@ -1,33 +1,39 @@
 #pragma once
 
-#include "node.hpp"
+#include <variant>
+
+#include "id.hpp"
+#include "path.hpp"
 
 namespace assets {
 
     //*********************************************************************************************
     //*********************************************************************************************
     //*********************************************************************************************
-    class PathBase : public Node {
+    class RefBase : public Node {
     public:
-        PathBase() = default;
-        PathBase(const char* path) : PathBase(std::string(path)) {}
-        PathBase(std::string path) : m_path(std::move(path)) {}
+        RefBase() = default;
+        RefBase(IdBase id) : m_value(std::move(id)) {}
+        RefBase(PathBase path) : m_value(std::move(path)) {}
 
-        const std::string& path() const { return m_path; }
+        bool is_id() const { return std::holds_alternative<IdBase>(m_value); }
+        bool is_path() const { return std::holds_alternative<PathBase>(m_value); }
+        const uuids::uuid& id() const { return std::get<IdBase>(m_value).id(); }
+        const std::string& path() const { return std::get<PathBase>(m_value).path(); }
 
     protected:
-        std::string m_path;
+        std::variant<IdBase, PathBase> m_value;
 
-    }; // class PathBase
+    }; // class RefBase
 
     //*********************************************************************************************
     //*********************************************************************************************
     //*********************************************************************************************
     template <typename T>
-    class Path : public PathBase {
+    class Ref : public RefBase {
     public:
-        using PathBase::PathBase;
+        using RefBase::RefBase;
 
-    }; // class Path
+    }; // class Ref
 
 } // namespace assets

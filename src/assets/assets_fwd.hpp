@@ -4,7 +4,9 @@ namespace assets {
 
     class Manager;
 
-    class Path;
-    class Id;
+    class RefBase;
+    template <typename T> class Ref;
+    template <typename T> class Path;
+    template <typename T> class Id;
 
 } // namespace assets

@@ -2,11 +2,10 @@
 
 #include <optional>
 
+#include "editor_assets_fwd.hpp"
 #include "manager.hpp"
 
 namespace assets {
-
-    class Ok {};
 
     enum class ERenameError {
         UNKNOWN
@@ -25,10 +24,6 @@ namespace assets {
     };
 
     enum class ECreateAssetError {
-        UNKNOWN
-    };
-
-    enum class EGetEntryError {
         UNKNOWN
     };
 
