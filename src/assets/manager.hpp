@@ -40,29 +40,37 @@ namespace assets {
         Manager(std::shared_ptr<fs::IFilesystem> filesystem
             , std::shared_ptr<sr::ISerializer> serializer);
 
-        // valitation
-        
-        bool is_valid_asset(const RefBase& ref);
+        // validation
+        bool is_valid(const RefBase& ref) const;
+        bool is_valid(const IdBase& id) const;
+        bool is_valid(const PathBase& path) const;
 
         // conversion
         template <typename T>
-        std::variant<Path<T>, EConversionError> as_asset_path(const Id<T>& id) const;
+        std::variant<Path<T>, EConversionError> as_path(const Id<T>& id) const;
         template <typename T>
-        std::variant<Id<T>, EConversionError> as_asset_id(const Path<T>& path) const;
+        std::variant<Id<T>, EConversionError> as_id(const Path<T>& path) const;
 
-        // entries loading/unloading
-        std::variant<Ok, EPreloadEntriesError> load_asset(const RefBase& ref);
-        std::variant<Ok, EReloadEntriesError> reload_asset(const RefBase& ref);
-        std::variant<Ok, EUnloadEntriesError> unload_asset(const RefBase& ref);
-        void unload_unused_assets();
+        // assets discovering/loading/unloading
+        void discover_assets();
+        std::variant<Ok, ELoadAssetError> load(const RefBase& ref);
+        std::variant<Ok, EReloadAssetError> reload(const RefBase& ref);
+        std::variant<Ok, EUnloadAssetError> unload(const RefBase& ref);
+        void unload_unused();
 
         // entries access
         template <typename T>
-        std::variant<std::shared_ptr<T>, EGetAssetError> get(const Ref<T>& ref);
+        std::variant<std::shared_ptr<T>, EGetAssetError> get(const Ref<T>& ref) const;
 
     protected:
+        bool is_valid(const uuids::uuid& id) const;
+        bool is_valid(const std::string& path) const;
+
         std::shared_ptr<fs::IFilesystem> m_filesystem;
         std::shared_ptr<sr::ISerializer> m_serializer;
+
+        std::map<uuids::uuid, std::shared_ptr<Asset>> m_ids;
+        std::map<std::string, std::shared_ptr<Asset>> m_paths;
 
     }; // class Manager
 

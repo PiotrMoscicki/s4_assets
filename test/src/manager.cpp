@@ -93,6 +93,7 @@ TEST_CASE( "Ref, Id, Path conversions", "[assets]" ) {
 //*************************************************************************************************
 TEST_CASE( "Is valid asset", "[Manager]" ) {
     std::shared_ptr<assets::Manager> man = create_test_manager();
+    man->discover_assets();
     assets::Ref<EntityPrefabAsset> valid_ref = assets::Path<EntityPrefabAsset>(VALID_PATH);
     assets::Ref<EntityPrefabAsset> invalid_ref = assets::Id<EntityPrefabAsset>(INVALID_ID);
     assets::Id<EntityPrefabAsset> valid_id = VALID_ID;

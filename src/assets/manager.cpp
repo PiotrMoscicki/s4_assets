@@ -13,6 +13,24 @@ Manager::Manager(std::shared_ptr<fs::IFilesystem> filesystem
 }
 
 //*************************************************************************************************
-bool Manager::is_valid_asset(const RefBase&) {
-    return true;
+bool Manager::is_valid(const RefBase& ref) const {
+    if (ref.is_id())
+        return is_valid(ref.id());
+    else
+        return is(valid(ref.path()));
+}
+
+//*************************************************************************************************
+bool Manager::is_valid(const IdBase& id) const {
+    return m_ids.find(id) != m_ids.end();
+}
+
+//*************************************************************************************************
+bool Manager::is_valid(const PathBase&) const {
+    return m_paths.find(id) != m_paths.end();;
+}
+
+//*************************************************************************************************
+void Manager::discover_assets() const {
+    
 }
