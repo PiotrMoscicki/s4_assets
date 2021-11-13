@@ -2,6 +2,7 @@
 
 #include <variant>
 #include <memory>
+#include <map>
 
 #include "assets_fwd.hpp"
 
@@ -16,20 +17,28 @@ namespace assets {
         UNKNOWN
     };
 
-    enum class EPreloadEntriesError {
+    enum class ERelativePathConversionError {
         UNKNOWN
     };
 
-    enum class EReloadEntriesError {
+    enum class ELoadAssetError {
         UNKNOWN
     };
 
-    enum class EUnloadEntriesError {
+    enum class EReloadAssetError {
+        UNKNOWN
+    };
+
+    enum class EUnloadAssetError {
         UNKNOWN
     };
 
     enum class EGetAssetError {
         UNKNOWN
+    };
+
+    class Asset {
+
     };
 
     //*********************************************************************************************
@@ -42,14 +51,19 @@ namespace assets {
 
         // validation
         bool is_valid(const RefBase& ref) const;
-        bool is_valid(const IdBase& id) const;
-        bool is_valid(const PathBase& path) const;
 
         // conversion
         template <typename T>
         std::variant<Path<T>, EConversionError> as_path(const Id<T>& id) const;
         template <typename T>
         std::variant<Id<T>, EConversionError> as_id(const Path<T>& path) const;
+
+        template <typename T>
+        std::variant<Path<T>, ERelativePathConversionError> as_path(const RefBase& parent
+            , const RelPath<T>& ref_path) const;
+        template <typename T>
+        std::variant<Id<T>, ERelativePathConversionError> as_id(const RefBase& parent
+            , const RelPath<T>& ref_path) const;
 
         // assets discovering/loading/unloading
         void discover_assets();
@@ -65,6 +79,8 @@ namespace assets {
     protected:
         bool is_valid(const uuids::uuid& id) const;
         bool is_valid(const std::string& path) const;
+        void discover_assets(const fs::Path& path);
+        void load_meta(const fs::Path& asset);
 
         std::shared_ptr<fs::IFilesystem> m_filesystem;
         std::shared_ptr<sr::ISerializer> m_serializer;

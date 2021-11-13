@@ -101,7 +101,7 @@ TEST_CASE( "Is valid asset", "[Manager]" ) {
     assets::Path<EntityPrefabAsset> valid_path = VALID_PATH;
     assets::Path<EntityPrefabAsset> invalid_path = INVALID_PATH;
 
-    REQUIRE( man->is_valid_asset(valid_id) == true );
-    REQUIRE( man->is_valid_asset(invalid_id) == false );
+    REQUIRE( man->is_valid(valid_id) == true );
+    REQUIRE( man->is_valid(invalid_id) == false );
     // REQUIRE( man.root().name() == "/" );
 }
