@@ -2,6 +2,19 @@
 
 namespace fs {
 
+    enum class EParentError {
+        UNDEFINED
+    };
+
+    enum class EParentError {
+        UNDEFINED
+    };
+    
+    enum class EParentError {
+        UNDEFINED
+    };
+
+
     class Path {
         const std::string& path() const;
         std::string name() const;
@@ -12,8 +25,8 @@ namespace fs {
     class IFilesystem {
     public:
         virtual Path root() const;
-        virtual Path parent() const;
-        virtual size_t children_count() const;
+        virtual Path parent(const Path& path) const;
+        virtual size_t children_count(const Path& path) const;
         virtual Path child(const Path& path, size_t idx) const;
 
         virtual bool is_dir(const Path& path) const;

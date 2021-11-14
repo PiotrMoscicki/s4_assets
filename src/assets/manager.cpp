@@ -45,9 +45,9 @@ void Manager::discover_assets(const fs::Path& path) {
 
 //*************************************************************************************************
 void Manager::load_meta(const fs::Path& asset_path) {
-    auto asset = std::make_shared<Asset>();
-    if (m_serializer->placement_deserialize(m_filesystem->read(asset_path), asset->meta)) {
-        m_ids.insert({ asset->meta.id, asset });
-        m_paths.insert({ asset_path, asset });
+    Meta meta;
+    if (m_serializer->placement_deserialize(m_filesystem->read(asset_path), meta)) {
+        m_id_to_meta.insert({ meta.id, meta });
+        m_path_to_meta.insert({ asset_path, meta });
     }
 }

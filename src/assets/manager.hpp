@@ -41,6 +41,10 @@ namespace assets {
 
     };
 
+    class Meta {
+
+    };
+
     //*********************************************************************************************
     //*********************************************************************************************
     //*********************************************************************************************
@@ -85,8 +89,10 @@ namespace assets {
         std::shared_ptr<fs::IFilesystem> m_filesystem;
         std::shared_ptr<sr::ISerializer> m_serializer;
 
-        std::map<uuids::uuid, std::shared_ptr<Asset>> m_ids;
-        std::map<std::string, std::shared_ptr<Asset>> m_paths;
+        std::map<uuids::uuid, Meta> m_id_to_meta;
+        std::map<std::string, Meta> m_path_to_meta
+        std::map<uuids::uuid, std::shared_ptr<Asset>> m_id_to_asset;
+        std::map<std::string, std::shared_ptr<Asset>> m_path_to_asset;
 
     }; // class Manager
 
